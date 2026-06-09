@@ -1,0 +1,6 @@
+{
+  "name": "AIVision",
+  "description": "Futuristic spacecraft fleet command and interstellar telemetry cockpit layout",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
