@@ -2,9 +2,9 @@ import { motion } from 'motion/react';
 import { ArrowRight, Sparkles, Rocket } from 'lucide-react';
 import Header from './components/Header';
 import StatsBox from './components/StatsBox';
-import AsteroidsSection from './components/AsteroidsSection';
-import MindsSection from './components/MindsSection';
-import ExplorationGuideSection from './components/ExplorationGuideSection';
+import VectorsSection from './components/VectorsSection';
+import AllianceSection from './components/AllianceSection';
+import AboutSection from './components/AboutSection';
 
 export default function App() {
   return (
@@ -55,24 +55,57 @@ export default function App() {
             <div className="flex flex-col gap-3">
               <motion.h1
                 id="hero-heading"
-                initial={{ opacity: 0, x: -30 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: 0.2, duration: 0.8, ease: 'easeOut' }}
-                className="font-display font-medium text-4xl sm:text-5xl md:text-[54px] leading-[1.1] text-white tracking-tight"
+                initial="hidden"
+                animate="visible"
+                variants={{
+                  hidden: { opacity: 0 },
+                  visible: {
+                    opacity: 1,
+                    transition: {
+                      staggerChildren: 0.15,
+                      delayChildren: 0.2
+                    }
+                  }
+                }}
+                className="font-display font-medium text-4xl sm:text-5xl md:text-[64px] leading-[1.1] text-white tracking-[-0.02em]"
               >
-                Launching <br />
-                the Next Era of <br />
-                <span className="font-sans italic font-light text-white tracking-normal">Spacecraft</span>
+                <motion.span 
+                  className="block"
+                  variants={{
+                    hidden: { opacity: 0, y: 30, filter: 'blur(12px)' },
+                    visible: { opacity: 1, y: 0, filter: 'blur(0px)', transition: { duration: 1.2, ease: [0.16, 1, 0.3, 1] } }
+                  }}
+                >
+                  Launching
+                </motion.span>
+                <motion.span 
+                  className="block"
+                  variants={{
+                    hidden: { opacity: 0, y: 30, filter: 'blur(12px)' },
+                    visible: { opacity: 1, y: 0, filter: 'blur(0px)', transition: { duration: 1.2, ease: [0.16, 1, 0.3, 1] } }
+                  }}
+                >
+                  the Next Era of
+                </motion.span>
+                <motion.span 
+                  className="block font-sans italic font-light text-white tracking-normal mt-1"
+                  variants={{
+                    hidden: { opacity: 0, y: 30, filter: 'blur(12px)' },
+                    visible: { opacity: 1, y: 0, filter: 'blur(0px)', transition: { duration: 1.2, ease: [0.16, 1, 0.3, 1] } }
+                  }}
+                >
+                  Spacecraft
+                </motion.span>
               </motion.h1>
             </div>
  
             {/* Description Paragraph */}
             <motion.p
               id="hero-subtitle"
-              initial={{ opacity: 0, x: 30 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ delay: 0.3, duration: 0.8, ease: 'easeOut' }}
-              className="text-neutral-400 text-xs sm:text-sm md:text-base leading-relaxed max-w-sm tracking-wide"
+              initial={{ opacity: 0, filter: 'blur(10px)', y: 20 }}
+              animate={{ opacity: 1, filter: 'blur(0px)', y: 0 }}
+              transition={{ delay: 0.6, duration: 0.8, ease: 'easeOut' }}
+              className="text-neutral-300 text-sm md:text-base leading-[1.7] max-w-md tracking-wide font-light"
             >
               Experience next-generation orbital trajectory planning, hyperdrive optimization, and real-time telemetry systems for modern galactic explorers.
             </motion.p>
@@ -80,30 +113,65 @@ export default function App() {
             {/* CTA action buttons */}
             <motion.div
               id="hero-ctas"
-              initial={{ opacity: 0, y: 15 }}
+              initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.4, duration: 0.6 }}
-              className="flex flex-wrap items-center gap-4 mt-2"
+              transition={{ delay: 0.8, duration: 0.8, ease: 'easeOut' }}
+              className="flex flex-wrap items-center gap-5 mt-4"
             >
-              {/* Get Started Button */}
+              {/* Primary Button */}
               <motion.button
                 id="cta-get-started"
-                whileHover={{ scale: 1.04, boxShadow: '0 12px 30px -10px rgba(44, 94, 173, 0.6)' }}
-                whileTap={{ scale: 0.98 }}
-                className="inline-flex items-center gap-2 px-7 py-3.5 rounded-2xl bg-[#2C5EAD] text-white font-semibold text-xs sm:text-sm transition-all duration-300 pointer-events-auto cursor-pointer"
+                whileHover="hover"
+                whileTap="tap"
+                variants={{
+                  hover: { scale: 1.05, boxShadow: '0 0 40px rgba(6, 182, 212, 0.6)' },
+                  tap: { scale: 0.96 }
+                }}
+                className="group relative inline-flex items-center gap-2 px-8 py-3.5 rounded-full bg-gradient-to-r from-blue-700 to-cyan-500 text-white font-medium text-sm transition-all duration-300 pointer-events-auto cursor-pointer overflow-hidden border border-cyan-400/50 shadow-[0_0_20px_rgba(6,182,212,0.3)]"
               >
-                <Rocket className="w-4 h-4 text-white hover:animate-pulse" />
-                <span>Start The Fleet</span>
+                {/* Animated Shimmer Sweep */}
+                <motion.div 
+                  className="absolute top-0 bottom-0 left-0 w-[150%] bg-gradient-to-r from-transparent via-white/30 to-transparent skew-x-[-20deg]"
+                  variants={{
+                    hover: { 
+                      x: ['-100%', '150%'],
+                      transition: { duration: 1.2, repeat: Infinity, ease: "linear" } 
+                    }
+                  }}
+                  initial={{ x: '-100%' }}
+                />
+                <Rocket className="w-4 h-4 text-white relative z-10 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-300" />
+                <span className="relative z-10 tracking-wide">Start The Fleet</span>
               </motion.button>
  
-              {/* Learn More link transformed to a glassmorphic button */}
+              {/* Secondary Button */}
               <motion.button
                 id="cta-learn-more"
-                whileHover={{ scale: 1.04, backgroundColor: 'rgba(255, 255, 255, 0.12)' }}
-                whileTap={{ scale: 0.98 }}
-                className="inline-flex items-center gap-2 px-7 py-3.5 rounded-2xl bg-white/[0.04] backdrop-blur-xl border border-white/10 text-white font-semibold text-xs sm:text-sm hover:border-white/20 hover:shadow-lg hover:shadow-black/10 transition-all duration-300 pointer-events-auto cursor-pointer"
+                whileHover="hover"
+                whileTap="tap"
+                variants={{
+                  hover: { 
+                    scale: 1.05, 
+                    backgroundColor: 'rgba(255, 255, 255, 0.08)',
+                    borderColor: 'rgba(255, 255, 255, 0.25)',
+                    boxShadow: '0 0 20px rgba(255, 255, 255, 0.05)'
+                  },
+                  tap: { scale: 0.96 }
+                }}
+                className="group relative inline-flex items-center gap-2 px-8 py-3.5 rounded-full bg-white/[0.03] backdrop-blur-md border border-white/10 text-neutral-300 font-medium text-sm transition-all duration-300 pointer-events-auto cursor-pointer overflow-hidden"
               >
-                <span>Learn More</span>
+                {/* Subtle Glass Reflection Sweep */}
+                <motion.div 
+                  className="absolute top-0 bottom-0 left-0 w-[150%] bg-gradient-to-r from-transparent via-white/10 to-transparent skew-x-[-20deg]"
+                  variants={{
+                    hover: { 
+                      x: ['-100%', '150%'],
+                      transition: { duration: 1.5, repeat: Infinity, ease: "linear" } 
+                    }
+                  }}
+                  initial={{ x: '-100%' }}
+                />
+                <span className="relative z-10 group-hover:text-white transition-colors duration-300">Learn More</span>
               </motion.button>
             </motion.div>
           </div>
@@ -119,13 +187,13 @@ export default function App() {
       </div>
 
       {/* 2. New Spacecraft Asteroids Section */}
-      <AsteroidsSection />
+      <VectorsSection />
 
       {/* 3. New Meet The Minds Section (exact referenced layout mirror) */}
-      <MindsSection />
+      <AllianceSection />
 
       {/* 4. Elegant Exploration Guide Section */}
-      <ExplorationGuideSection />
+      <AboutSection />
 
       {/* Global Landing Page Footer */}
       <footer id="landing-footer" className="w-full py-6 text-center text-[10px] sm:text-[11px] font-mono text-neutral-500 border-t border-white/5 bg-black">
